@@ -8,9 +8,14 @@ describe Scene7izer do
   it "should display logging info if verbose mode on"
 
   context "string matching" do
-      it "should match HTML HREFs"
-      it "should match HTML SRCs"
-      it "should match CSS urls"
+      it "should match images in HREFs" do
+        Scene7izer.match('<a href="/images/xmas2012-lights-light01-on.jpg"></a>').should_not be_nil
+        Scene7izer.match('<a href="non_image_file.html"></a>').should be_nil
+        Scene7izer.match('<a href="/images/this-is-no-jpg.html"></a>').should be_nil
+      end
+
+      it "should match images in HTML SRCs"
+      it "should match images in CSS urls"
   end
 
   context "scene7 path" do
