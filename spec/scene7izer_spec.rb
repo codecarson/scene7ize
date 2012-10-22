@@ -7,6 +7,12 @@ describe Scene7izer do
   it "should replace the input file if an output file is not provided"
   it "should display logging info if verbose mode on"
 
+  context "string matching" do
+      it "should match HTML HREFs"
+      it "should match HTML SRCs"
+      it "should match CSS urls"
+  end
+
   context "scene7 path" do
     it "should contain a specified prefix"
     it "should contain a width parameter"
