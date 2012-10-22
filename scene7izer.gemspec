@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = Scene7izer::VERSION
   gem.authors       = ["Brad Carson"]
   gem.email         = ["brad@pixelwavedesign.com"]
-  gem.description   = %q{TODO: Write a gem description}
+  gem.description   = %q{...}
   gem.summary       = %q{Converts local image paths in an HTML or CSS file to Scene7 paths containing dimensions and format data}
   gem.homepage      = ""
 

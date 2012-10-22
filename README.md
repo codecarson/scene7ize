@@ -1,6 +1,6 @@
 # Scene7izer
 
-TODO: Write a gem description
+Converts local image paths in an HTML or CSS file to Scene7 paths containing dimensions and format info.
 
 ## Installation
 
@@ -19,6 +19,10 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here
+
+## TODO
+
+1. Write optional parameter that allows an output file to be created (for running 'safely')
 
 ## Contributing
 
