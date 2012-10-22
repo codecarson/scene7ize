@@ -7,11 +7,12 @@ describe Scene7izer do
   it "should replace the input file if an output file is not provided"
   it "should display logging info if verbose mode on"
 
+
   context "string matching" do
-      it "should match images in HREFs" do
-        Scene7izer.match('<a href="/images/xmas2012-lights-light01-on.jpg"></a>').should_not be_nil
-        Scene7izer.match('<a href="non_image_file.html"></a>').should be_nil
-        Scene7izer.match('<a href="/images/this-is-no-jpg.html"></a>').should be_nil
+      it "should return an image filename given an HREF attribute" do
+        Scene7izer.filename_from_string('<a href="/images/header.jpg"></a>').should == "/images/header.jpg"
+        Scene7izer.filename_from_string('<a href="non_image_file.html"></a>').should be_nil
+        Scene7izer.filename_from_string('<a href="/images/this-is-no-jpg.html"></a>').should be_nil
       end
 
       it "should match images in HTML SRCs"
