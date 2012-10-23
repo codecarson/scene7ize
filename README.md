@@ -25,6 +25,7 @@ Or, omit the output file to replace contents of an input file.
 ## TODO
 
 1. Code documentation
+2. Better error handling and documentation for arguments
 
 ## Contributing
 
