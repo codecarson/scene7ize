@@ -6,25 +6,16 @@ describe Scene7izer do
   it "should write to an output file if provided"
   it "should replace the input file if an output file is not provided"
   it "should display logging info if verbose mode on"
-
-
-  context "string matching" do
-      it "should return an image filename given an HREF attribute" do
-        Scene7izer.filename_from_string('<a href="/images/header.jpg"></a>').should == "/images/header.jpg"
-        Scene7izer.filename_from_string('<a href="non_image_file.html"></a>').should be_nil
-        Scene7izer.filename_from_string('<a href="/images/this-is-no-jpg.html"></a>').should be_nil
-      end
-
-      it "should match images in HTML SRCs"
-      it "should match images in CSS urls"
-  end
+  it "should open image files relative to the input file"
 
   context "scene7 path" do
     it "should contain a specified prefix"
-    it "should contain a width parameter"
-    it "should contain a height parameter"
-    it "should contain a quality parameter given a JPG"
-    it "should contain a PNG format parameter given a PNG"
-    it "should contain a GIF format parameter given a GIF"
+    it "should create a valid scene7 url" do
+      image = double("Image", :width => 10, :height => 15, :format => 'jpg')
+      MiniMagick::Image.should_receive(:open).and_return(image)
+
+      scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", "test.jpg")
+      scene7url.should == "http://example.com/scene7/test?wid=10&hei=15&qlt=100"
+    end
   end
 end
