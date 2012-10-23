@@ -36,6 +36,10 @@ describe Scene7izer do
       it "should contain a quality format parameter" do
         @scene7url.should match /qlt=100/
       end
+
+      it "should not contain a file extension" do
+        @scene7url.should_not match /\.(jpg|png|jpeg|gif)\?/
+      end
     end
 
     it "given a PNG, should contain a valid format parameter" do
