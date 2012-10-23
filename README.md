@@ -20,11 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The first argument is the Scene7 URL prefix.
+The second argument is an input file.
+(Optional) Third argument is an output file.
+
+To run in "safe mode", specify an output file:
+
+    $ scene7izer http://s7.example.com index.html output.html
+
+Or, omit the output file to replace contents of an input file.
+
+    $ scene7izer http://s7.example.com index.html
 
 ## TODO
 
-1. Write optional parameter that allows an output file to be created (for running 'safely')
+1. Code documentation
 
 ## Contributing
 
