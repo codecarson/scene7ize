@@ -22,4 +22,5 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'mini_magick'
   gem.add_runtime_dependency 'uri'
+
 end
