@@ -104,7 +104,12 @@ describe Scene7izer do
       @scene7url.should_not match /qlt=\d{1,}/
     end
 
-    it "should throw an error if not a valid image file"
+    it "should throw an error if not a valid image file" do
+      @image_filename = 'test.png'
+
+      expect { Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename) }.to raise_error
+    end
+
   end
 
 end
