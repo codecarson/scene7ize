@@ -2,6 +2,8 @@
 
 Converts local image paths in an HTML or CSS file to Scene7 paths containing dimensions and format info.
 
+Automatically assumes JPGs have been optimized, default quality is set to 100
+
 ## Installation
 
 Add this line to your application's Gemfile:

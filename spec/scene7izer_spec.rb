@@ -32,5 +32,9 @@ describe Scene7izer do
       @scene7url.should match /hei=15/
     end
 
+    it "should contain a quality format parameter given a JPG" do
+      @scene7url.should match /qlt=100/
+    end
+
   end
 end
