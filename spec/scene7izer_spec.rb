@@ -38,8 +38,9 @@ describe Scene7izer do
       Scene7izer.parse_file(@s7_url_prefix, @input_filename)
     end
 
-    it "should display an error given an invalid input file"
-    it "should display an error given an invalid output filename"
+    it "should display an error given an invalid input file" do
+      expect { Scene7izer.parse_file(@s7_url_prefix, 'file-that-doesnt-exist.ext') }.to raise_error
+    end
 
   end
 
