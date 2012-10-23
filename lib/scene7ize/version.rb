@@ -1,3 +1,3 @@
-module Scene7izer
+module Scene7ize
   VERSION = "0.1.0"
 end

@@ -1,2 +1,2 @@
-require 'scene7izer'
+require 'scene7ize'
 

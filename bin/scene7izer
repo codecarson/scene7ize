@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'scene7izer'
-
-Scene7izer.parse_file(ARGV[0], ARGV[1], ARGV[2])

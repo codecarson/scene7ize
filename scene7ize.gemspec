@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'scene7izer/version'
+require 'scene7ize/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "scene7izer"
-  gem.version       = Scene7izer::VERSION
+  gem.name          = "scene7ize"
+  gem.version       = Scene7ize::VERSION
   gem.authors       = ["Brad Carson"]
   gem.email         = ["brad@pixelwavedesign.com"]
   gem.description   = %q{...}

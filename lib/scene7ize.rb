@@ -1,8 +1,8 @@
-require "scene7izer/version"
+require "scene7ize/version"
 require 'mini_magick'
 require 'uri'
 
-module Scene7izer
+module Scene7ize
   DEFAULT_REGEX = /(?<=['"])(?<dir_and_basename>((?!['"]).)*)\.(?<ext>gif|jpg|jpeg|png)(?=['"])/im
 
 

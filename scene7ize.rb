@@ -1,5 +1,5 @@
 # use like so:
-# ruby scene7izer.rb media/styles/christmas2012/trees/trees.css out.css
+# ruby scene7ize.rb media/styles/christmas2012/trees/trees.css out.css
 
 # references:
 # http://www.imagemagick.org/RMagick/doc/usage.html

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Scene7izer do
+describe Scene7ize do
 
   context "#parse_file" do
 
@@ -26,22 +26,22 @@ describe Scene7izer do
 
     it "should write to an output file when one is given" do
       File.stub(:read).with(@input_filename) { @input_data }
-      Scene7izer.stub(:scene7url_from)
+      Scene7ize.stub(:scene7url_from)
       File.should_not_receive(:open).with(@input_filename)
       File.should_receive(:open).with(@output_filename, 'w').and_return(@output_data)
-      Scene7izer.parse_file(@s7_url_prefix, @input_filename, @output_filename)
+      Scene7ize.parse_file(@s7_url_prefix, @input_filename, @output_filename)
     end
 
     it "should overwrite input file when an output is not specified" do
       File.stub(:read).with(@input_filename) { @input_data }
-      Scene7izer.stub(:scene7url_from)
+      Scene7ize.stub(:scene7url_from)
       File.should_not_receive(:open).with(@output_filename)
       File.should_receive(:open).with(@input_filename, 'w').and_return(@output_data)
-      Scene7izer.parse_file(@s7_url_prefix, @input_filename)
+      Scene7ize.parse_file(@s7_url_prefix, @input_filename)
     end
 
     it "should display an error given an invalid input file" do
-      expect { Scene7izer.parse_file(@s7_url_prefix, 'file-that-doesnt-exist.ext') }.to raise_error
+      expect { Scene7ize.parse_file(@s7_url_prefix, 'file-that-doesnt-exist.ext') }.to raise_error
     end
 
   end
@@ -56,7 +56,7 @@ describe Scene7izer do
         @image = { :width => 10, :height => 15, :format => 'jpg' }
 
         MiniMagick::Image.should_receive(:open).and_return(@image)
-        @scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename)
+        @scene7url = Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename)
       end
 
       it "should contain a specified prefix"
@@ -87,7 +87,7 @@ describe Scene7izer do
       @image = { :width => 10, :height => 15, :format => 'png' }
 
       MiniMagick::Image.should_receive(:open).and_return(@image)
-      @scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename)
+      @scene7url = Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename)
 
       @scene7url.should match /fmt=png-alpha/
       @scene7url.should_not match /fmt=gif-alpha/
@@ -99,7 +99,7 @@ describe Scene7izer do
       @image = { :width => 10, :height => 15, :format => 'gif' }
 
       MiniMagick::Image.should_receive(:open).and_return(@image)
-      @scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename)
+      @scene7url = Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename)
 
       @scene7url.should match /fmt=gif-alpha/
       @scene7url.should_not match /fmt=png-alpha/
@@ -109,7 +109,7 @@ describe Scene7izer do
     it "should throw an error if not a valid image file" do
       @image_filename = 'test.png'
 
-      expect { Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename) }.to raise_error
+      expect { Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename) }.to raise_error
     end
 
   end

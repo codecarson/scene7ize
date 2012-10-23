@@ -1,4 +1,4 @@
-# Scene7izer
+# Scene7ize
 
 Converts local image paths in an HTML or CSS file to Scene7 paths containing dimensions and format info.
 
@@ -6,7 +6,7 @@ Automatically assumes JPGs have been optimized, default quality is set to 100
 
 ## Installation
 
-    $ gem install scene7izer
+    $ gem install scene7ize
 
 ## Usage
 
@@ -16,11 +16,11 @@ The second argument is an input file.
 
 To run in "safe mode", specify an output file:
 
-    $ scene7izer http://s7.example.com index.html output.html
+    $ scene7ize http://s7.example.com index.html output.html
 
 Or, omit the output file to replace contents of an input file.
 
-    $ scene7izer http://s7.example.com index.html
+    $ scene7ize http://s7.example.com index.html
 
 ## TODO
 
