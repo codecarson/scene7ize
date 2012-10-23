@@ -28,7 +28,7 @@ module Scene7izer
   end
 
 
-  def self.parse_file(scene7prefix, input_file, output_file)
+  def self.parse_file(scene7prefix, input_file, output_file = nil)
 
     file_content = File.read(input_file)
     replacement = file_content.gsub!(DEFAULT_REGEX) do |image_filename|
