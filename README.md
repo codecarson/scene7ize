@@ -6,16 +6,6 @@ Automatically assumes JPGs have been optimized, default quality is set to 100
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'scene7izer'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
     $ gem install scene7izer
 
 ## Usage
