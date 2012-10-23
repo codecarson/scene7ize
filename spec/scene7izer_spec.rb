@@ -26,6 +26,7 @@ describe Scene7izer do
 
     it "should write to an output file when one is given" do
       File.stub(:read).with(@input_filename) { @input_data }
+      Scene7izer.stub(:scene7url_from)
       File.should_not_receive(:open).with(@input_filename)
       File.should_receive(:open).with(@output_filename, 'w').and_return(@output_data)
       Scene7izer.parse_file(@s7_url_prefix, @input_filename, @output_filename)
@@ -33,6 +34,7 @@ describe Scene7izer do
 
     it "should overwrite input file when an output is not specified" do
       File.stub(:read).with(@input_filename) { @input_data }
+      Scene7izer.stub(:scene7url_from)
       File.should_not_receive(:open).with(@output_filename)
       File.should_receive(:open).with(@input_filename, 'w').and_return(@output_data)
       Scene7izer.parse_file(@s7_url_prefix, @input_filename)
@@ -51,7 +53,7 @@ describe Scene7izer do
     context "given a supported image" do
       before(:each) do
         @image_filename = 'test.jpg'
-        @image = double("Image", :width => 10, :height => 15, :format => 'jpg')
+        @image = { :width => 10, :height => 15, :format => 'jpg' }
 
         MiniMagick::Image.should_receive(:open).and_return(@image)
         @scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename)
@@ -82,7 +84,7 @@ describe Scene7izer do
 
     it "given a PNG, should contain a valid format parameter" do
       @image_filename = 'test.png'
-      @image = double("Image", :width => 10, :height => 15, :format => 'png')
+      @image = { :width => 10, :height => 15, :format => 'png' }
 
       MiniMagick::Image.should_receive(:open).and_return(@image)
       @scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename)
@@ -94,7 +96,7 @@ describe Scene7izer do
 
     it "given a GIF, should contain a valid format parameter" do
       @image_filename = 'test.gif'
-      @image = double("Image", :width => 10, :height => 15, :format => 'gif')
+      @image = { :width => 10, :height => 15, :format => 'gif' }
 
       MiniMagick::Image.should_receive(:open).and_return(@image)
       @scene7url = Scene7izer.scene7url_from("http://example.com/scene7/", @image_filename)
