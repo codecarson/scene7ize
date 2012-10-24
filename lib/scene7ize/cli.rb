@@ -44,6 +44,12 @@ module Scene7ize
     def version
       puts "Scene7ize version #{ ::Scene7ize::VERSION }"
     end
+
+    private
+
+    def method_missing(meth, *args)
+      help
+    end
   end
 
 end
