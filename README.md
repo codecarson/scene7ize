@@ -16,11 +16,11 @@ Third argument (optional) is an output file.
 
 To run in "safe mode", specify an output file:
 
-    $ scene7ize http://s7.example.com index.html output.html
+    $ scene7ize parse -u http://s7.example.com -i index.html -o output.html
 
 Or, omit the output file to replace contents of an input file.
 
-    $ scene7ize http://s7.example.com index.html
+    $ scene7ize parse -u http://s7.example.com -i index.html
 
 ## TODO
 
