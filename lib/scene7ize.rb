@@ -4,7 +4,8 @@ require 'uri'
 
 module Scene7ize
   DEFAULT_REGEX = /(?<=['"\())])(?<dir_and_basename>((?!['"\)]).)*)\.(?<ext>gif|jpg|jpeg|png)(?=['"\)])/i
-  attr_accessor :scene7prefix
+
+  class << self; attr_accessor :scene7prefix; end
 
   def self.scene7url_from(image_filename)
     # TODO: error handling
@@ -51,5 +52,4 @@ module Scene7ize
     File.open(output_file, "w") { |file| file.puts replacement }
 
   end
-
 end
