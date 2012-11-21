@@ -29,7 +29,7 @@ describe Scene7ize do
       Scene7ize.stub(:scene7url_from)
       File.should_not_receive(:open).with(@input_filename)
       File.should_receive(:open).with(@output_filename, 'w').and_return(@output_data)
-      Scene7ize.parse_file(@input_filename, @output_filename)
+      Scene7ize.parse_file(@s7_url_prefix, @input_filename, @output_filename)
     end
 
     it "should overwrite input file when an output is not specified" do
@@ -37,7 +37,7 @@ describe Scene7ize do
       Scene7ize.stub(:scene7url_from)
       File.should_not_receive(:open).with(@output_filename)
       File.should_receive(:open).with(@input_filename, 'w').and_return(@output_data)
-      Scene7ize.parse_file(@input_filename)
+      Scene7ize.parse_file(@s7_url_prefix, @input_filename)
     end
 
     it "should display an error given an invalid input file" do
@@ -74,13 +74,14 @@ describe Scene7ize do
         @image = { :width => 10, :height => 15, :format => 'jpg' }
 
         MiniMagick::Image.should_receive(:open).and_return(@image)
-        @scene7url = Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename)
+        Scene7ize.should_receive(:scene7prefix).and_return("http://s7.example.com/")
+        @scene7url = Scene7ize.scene7url_from(@image_filename)
       end
 
       it "should contain a specified prefix"
 
       it "should create a valid scene7 url" do
-        @scene7url.should == "http://example.com/scene7/test?wid=10&hei=15&qlt=100"
+        @scene7url.should == "http://s7.example.com/test?wid=10&hei=15&qlt=100"
       end
 
       it "should contain a valid width parameter" do
@@ -105,7 +106,8 @@ describe Scene7ize do
       @image = { :width => 10, :height => 15, :format => 'png' }
 
       MiniMagick::Image.should_receive(:open).and_return(@image)
-      @scene7url = Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename)
+      Scene7ize.should_receive(:scene7prefix).and_return("http://s7.example.com/")
+      @scene7url = Scene7ize.scene7url_from(@image_filename)
 
       @scene7url.should match /fmt=png-alpha/
       @scene7url.should_not match /fmt=gif-alpha/
@@ -117,7 +119,8 @@ describe Scene7ize do
       @image = { :width => 10, :height => 15, :format => 'gif' }
 
       MiniMagick::Image.should_receive(:open).and_return(@image)
-      @scene7url = Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename)
+      Scene7ize.should_receive(:scene7prefix).and_return("http://s7.example.com/")
+      @scene7url = Scene7ize.scene7url_from(@image_filename)
 
       @scene7url.should match /fmt=gif-alpha/
       @scene7url.should_not match /fmt=png-alpha/
@@ -126,8 +129,9 @@ describe Scene7ize do
 
     it "should throw an error if not a valid image file" do
       @image_filename = 'test.png'
+      Scene7ize.stub(:scene7prefix).and_return("http://s7.example.com/")
 
-      expect { Scene7ize.scene7url_from("http://example.com/scene7/", @image_filename) }.to raise_error
+      expect { Scene7ize.scene7url_from(@image_filename) }.to raise_error
     end
 
   end

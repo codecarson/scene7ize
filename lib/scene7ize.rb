@@ -4,11 +4,9 @@ require 'uri'
 
 module Scene7ize
   DEFAULT_REGEX = /(?<=['"\())])(?<dir_and_basename>((?!['"]).)*)\.(?<ext>gif|jpg|jpeg|png)(?=['"\)])/im
+  attr_accessor :scene7prefix
 
-
-  def self.scene7url_from(scene7prefix, image_filename)
-    @scene7prefix = scene7prefix
-
+  def self.scene7url_from(image_filename)
     # TODO: error handling
     image = MiniMagick::Image.open(image_filename)
 
@@ -26,7 +24,7 @@ module Scene7ize
     basename = File.basename(image_filename, File.extname(image_filename))
 
     # TODO: error handle  URI::InvalidURIError
-    URI.join(@scene7prefix, "#{basename}?wid=#{image[:width]}&hei=#{image[:height]}#{suffix}").to_s
+    URI.join(scene7prefix, "#{basename}?wid=#{image[:width]}&hei=#{image[:height]}#{suffix}").to_s
   end
 
 
@@ -36,12 +34,14 @@ module Scene7ize
 
       # reconstruct image path relative to input file and open
       image_filename = File.join(@input_file_path, image_filename)
-      self.scene7url_from(@scene7prefix, image_filename)
+      self.scene7url_from(image_filename)
     end
   end
 
 
-  def self.parse_file(input_file, output_file = nil)
+  def self.parse_file(scene7prefix, input_file, output_file = nil)
+    @scene7prefix = scene7prefix
+
     file_content = File.read(input_file)
     @input_file_path = File.dirname(input_file)
 
