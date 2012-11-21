@@ -31,7 +31,7 @@ module Scene7ize
 
 
   def self.replace(content)
-    replacement = content.gsub!(DEFAULT_REGEX) do |match|
+    replacement = content.gsub(DEFAULT_REGEX) do |match|
       image_filename = "#{$~[:dir_and_basename]}.#{$~[:ext]}"
 
       # reconstruct image path relative to input file and open
