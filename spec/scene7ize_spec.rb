@@ -29,7 +29,7 @@ describe Scene7ize do
       Scene7ize.stub(:scene7url_from)
       File.should_not_receive(:open).with(@input_filename)
       File.should_receive(:open).with(@output_filename, 'w').and_return(@output_data)
-      Scene7ize.parse_file(@s7_url_prefix, @input_filename, @output_filename)
+      Scene7ize.parse_file(@input_filename, @output_filename)
     end
 
     it "should overwrite input file when an output is not specified" do
@@ -37,11 +37,29 @@ describe Scene7ize do
       Scene7ize.stub(:scene7url_from)
       File.should_not_receive(:open).with(@output_filename)
       File.should_receive(:open).with(@input_filename, 'w').and_return(@output_data)
-      Scene7ize.parse_file(@s7_url_prefix, @input_filename)
+      Scene7ize.parse_file(@input_filename)
     end
 
     it "should display an error given an invalid input file" do
-      expect { Scene7ize.parse_file(@s7_url_prefix, 'file-that-doesnt-exist.ext') }.to raise_error
+      expect { Scene7ize.parse_file('file-that-doesnt-exist.ext') }.to raise_error
+    end
+
+  end
+
+
+  context "#replace" do
+
+    it "should parse a CSS url string with no quotes" do
+      @scene7url = "http://s7.example.com/dancing-happy-face.gif?wid=10&hei=10&fmt=gif-alpha"
+      @input_data = <<-CONTENTS
+        background: url(../../../../images/dancing-happy-face.gif) top left no-repeat;
+      CONTENTS
+      @expected_output = <<-CONTENTS
+        background: url(#{@scene7url}) top left no-repeat;
+      CONTENTS
+
+      Scene7ize.stub(:scene7url_from).and_return(@scene7url)
+      Scene7ize.replace(@input_data).should == @expected_output
     end
 
   end
