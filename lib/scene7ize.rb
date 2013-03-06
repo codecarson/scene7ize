@@ -9,6 +9,12 @@ module Scene7ize
 
   def self.scene7url_from(image_filename)
     # TODO: error handling
+
+    if !File.exists?(image_filename)
+      puts "ERROR: Could not open #{image_filename}.  Leaving unchanged."
+      return false
+    end
+
     image = MiniMagick::Image.open(image_filename)
 
     suffix = case image[:format].downcase
@@ -31,11 +37,14 @@ module Scene7ize
 
   def self.replace(content)
     replacement = content.gsub(DEFAULT_REGEX) do |match|
-      image_filename = "#{$~[:dir_and_basename]}.#{$~[:ext]}"
+      original_filename = "#{$~[:dir_and_basename]}.#{$~[:ext]}"
+
+      puts "matching #{original_filename}"
 
       # reconstruct image path relative to input file and open
-      image_filename = File.join(@base_path || @input_file_path, image_filename)
-      self.scene7url_from(image_filename)
+      image_filename = File.join(@base_path || @input_file_path, original_filename)
+
+      self.scene7url_from(image_filename) || original_filename
     end
   end
 

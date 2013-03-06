@@ -22,6 +22,8 @@ describe Scene7ize do
       @output_data = <<-CONTENTS
         <p id="jpg"><a href="#{@s7_url}"><img src="#{@s7_url}" alt="Test jpg"></a></p>
       CONTENTS
+
+      File.stub(:exists?)
     end
 
     it "should write to an output file when one is given" do
@@ -84,9 +86,11 @@ describe Scene7ize do
         @image_filename = 'test.jpg'
         @image = { :width => 10, :height => 15, :format => 'jpg' }
 
+        File.stub(:exists?).and_return(true)
         MiniMagick::Image.should_receive(:open).and_return(@image)
         Scene7ize.should_receive(:scene7prefix).and_return("http://s7.example.com/")
         @scene7url = Scene7ize.scene7url_from(@image_filename)
+
       end
 
       it "should contain a specified prefix"
@@ -116,6 +120,7 @@ describe Scene7ize do
       @image_filename = 'test.png'
       @image = { :width => 10, :height => 15, :format => 'png' }
 
+      File.stub(:exists?).and_return(true)
       MiniMagick::Image.should_receive(:open).and_return(@image)
       Scene7ize.should_receive(:scene7prefix).and_return("http://s7.example.com/")
       @scene7url = Scene7ize.scene7url_from(@image_filename)
@@ -129,6 +134,7 @@ describe Scene7ize do
       @image_filename = 'test.gif'
       @image = { :width => 10, :height => 15, :format => 'gif' }
 
+      File.stub(:exists?).and_return(true)
       MiniMagick::Image.should_receive(:open).and_return(@image)
       Scene7ize.should_receive(:scene7prefix).and_return("http://s7.example.com/")
       @scene7url = Scene7ize.scene7url_from(@image_filename)
@@ -138,11 +144,12 @@ describe Scene7ize do
       @scene7url.should_not match /qlt=\d{1,}/
     end
 
-    it "should throw an error if not a valid image file" do
+    it "should return false if not a valid image file" do
       @image_filename = 'test.png'
       Scene7ize.stub(:scene7prefix).and_return("http://s7.example.com/")
 
-      expect { Scene7ize.scene7url_from(@image_filename) }.to raise_error
+      scene7url = Scene7ize.scene7url_from(@image_filename)
+      scene7url.should == false
     end
 
   end
