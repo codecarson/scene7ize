@@ -44,6 +44,17 @@ describe Scene7ize do
       expect { Scene7ize.parse_file('file-that-doesnt-exist.ext') }.to raise_error
     end
 
+    it "should parse files relative to a base bath, if one is given" do
+      base_path = "/code/my_project_root"
+
+      File.stub(:read).with(@input_filename) { @input_data }
+      File.stub(:open) #.with(@output_filename, 'w').and_return(@output_data)
+
+      Scene7ize.should_receive(:scene7url_from).with(File.join(base_path, "test-image.jpg")).any_number_of_times
+
+      Scene7ize.parse_file(@s7_url_prefix, @input_filename, @output_filename, base_path)
+    end
+
   end
 
 

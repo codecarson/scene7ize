@@ -27,9 +27,14 @@ module Scene7ize
                   :type => :string,
                   :aliases => '-o',
                   :banner => 'write to an output file instead of overwriting the input file'
+
+    method_option :base_path,
+                  :type => :string,
+                  :aliases => '-b',
+                  :banner => 'sets a base path to reference the image, otherwise references relative to input file'
     def parse
 
-      Scene7ize.parse_file(options[:url_prefix], options[:input_file], options[:output_file])
+      Scene7ize.parse_file(options[:url_prefix], options[:input_file], options[:output_file], options[:base_path])
 
     end
 
