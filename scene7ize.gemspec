@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["brad@pixelwavedesign.com"]
   gem.description   = %q{...}
   gem.summary       = %q{Converts local image paths in an HTML or CSS file to Scene7 paths containing dimensions and format data}
-  gem.homepage      = "https://github.com/codercarson/scene7ize"
+  gem.homepage      = "https://github.com/codecarson/scene7ize"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
