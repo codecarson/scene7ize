@@ -10,10 +10,10 @@ Automatically assumes JPGs have been optimized, default quality is set to 100.
 
 ## Usage
 
-The first argument is the Scene7 URL prefix.
-The second argument is an input file.
-Third argument (optional) is an output file.
-Fourth argument (optional) is a base path.  If provided, images will be reference from it - otherwise they will be referenced relative to the input file.
+- The first argument is the Scene7 URL prefix.
+- The second argument is an input file.
+- Third argument (optional) is an output file.
+- Fourth argument (optional) is a base path.  If provided, images will be reference from it - otherwise they will be referenced relative to the input file.
 
 To run in "safe mode", specify an output file:
 
