@@ -3,7 +3,7 @@ require 'mini_magick'
 require 'uri'
 
 module Scene7ize
-  DEFAULT_REGEX = /(?<=['"\())])(?<dir_and_basename>((?!['"\)]).)*)\.(?<ext>gif|jpg|jpeg|png)(?=['"\)])/i
+  DEFAULT_REGEX = /(?<=[\('"])(?<dir_and_basename>((?!['"\)]).)*)\.(?<ext>gif|jpg|jpeg|png)(?=['"\)])/i
 
   class << self; attr_accessor :scene7prefix; end
 
